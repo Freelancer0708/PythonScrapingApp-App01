@@ -13,7 +13,7 @@ app.config.from_object(Config)
 basic_auth = BasicAuth(app)
 
 # MySQL Database Configuration
-DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv('DATABASE_URL').replace("mysql://", "mysql+pymysql://")
 engine = create_engine(DATABASE_URL)
 
 @app.route('/')
