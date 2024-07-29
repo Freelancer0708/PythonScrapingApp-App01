@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from sqlalchemy import create_engine
 from config import Config
+import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -12,7 +13,7 @@ app.config.from_object(Config)
 basic_auth = BasicAuth(app)
 
 # MySQL Database Configuration
-DATABASE_URL = app.config['SQLALCHEMY_DATABASE_URI']
+DATABASE_URL = os.getenv('DATABASE_URL')
 engine = create_engine(DATABASE_URL)
 
 @app.route('/')
@@ -47,4 +48,5 @@ def results():
     return render_template('results.html', data=data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
