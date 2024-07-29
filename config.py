@@ -1,8 +1,12 @@
 import os
+from dotenv import load_dotenv
+
+# .envファイルから環境変数を読み込む
+load_dotenv()
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'mysql+pymysql://your_db_user:your_db_password@localhost/your_db_name'
+    SECRET_KEY = os.getenv('SECRET_KEY', 'you-will-never-guess')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    BASIC_AUTH_USERNAME = os.environ.get('BASIC_AUTH_USERNAME')
-    BASIC_AUTH_PASSWORD = os.environ.get('BASIC_AUTH_PASSWORD')
+    BASIC_AUTH_USERNAME = os.getenv('BASIC_AUTH_USERNAME')
+    BASIC_AUTH_PASSWORD = os.getenv('BASIC_AUTH_PASSWORD')

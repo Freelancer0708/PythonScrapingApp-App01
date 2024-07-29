@@ -9,9 +9,6 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
-# ベーシック認証の設定
-app.config['BASIC_AUTH_USERNAME'] = 'your_username'  # ここを環境変数に変更する場合はConfigクラスで設定します
-app.config['BASIC_AUTH_PASSWORD'] = 'your_password'  # ここを環境変数に変更する場合はConfigクラスで設定します
 basic_auth = BasicAuth(app)
 
 # MySQL Database Configuration
